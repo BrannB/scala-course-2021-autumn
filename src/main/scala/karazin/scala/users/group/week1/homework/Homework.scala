@@ -40,26 +40,88 @@ object Homework :
 
   object `Boolean Operators` :
 
-    def not(b: Boolean): Boolean = ??? // here is my greatest solution
+    def not(b: Boolean): Boolean =
+      if (b)
+        false
+      else
+        true
 
-    def and(left: Boolean, right: Boolean): Boolean = ???
+    end not
 
-    def or(left: Boolean, right: Boolean): Boolean = ???
+    def and(left: Boolean, right: Boolean): Boolean =
+      if not(left) then
+        false
+      else if not(right) then
+        false
+      else
+        true
+
+    end and
+
+    def or(left: Boolean, right: Boolean): Boolean =
+      if (left)
+        true
+      else if (right)
+        true
+      else
+        false
+
+    end or
 
   end `Boolean Operators`
 
   object `Fermat Numbers` :
 
-    val multiplication: (BigInt, BigInt) => BigInt = ???
+    val multiplication: (BigInt, BigInt) => BigInt = (left, right) => {
+      @tailrec
+      def inner(left: BigInt, right: BigInt, acc: BigInt): BigInt = {
+        if (left == 0) acc
+        else inner(left - 1, right, acc + right)
+      }
 
-    val power: (BigInt, BigInt) => BigInt = ???
+      inner(left, right, 0)
+    }
 
-    val fermatNumber: Int => BigInt = ???
+    val power: (BigInt, BigInt) => BigInt = (left, right) => {
+      @tailrec
+      def inner(left: BigInt, right: BigInt, acc: BigInt): BigInt = {
+        if (right == 0) acc
+        else inner(left, right - 1, multiplication(acc, left))
+      }
+
+      inner(left, right, 1)
+    }
+
+    val fermatNumber: Int => BigInt = n => power(2, power(2, n)) + 1
 
   end `Fermat Numbers`
 
   object `Look-and-say Sequence` :
-    val lookAndSaySequenceElement: Int => BigInt = ???
+
+    def toLookAndSay(n: BigInt): BigInt = {
+      val list = n.toString.map(_.asDigit).toList
+
+      @tailrec
+      def loop(ints: List[Int], cur: BigInt, cnt: Int, acc: BigInt): BigInt = {
+        if (ints == List()) (acc * 10 + cnt) * 10 + cur
+        else {
+          if (ints.head == cur) loop(ints.tail, cur, cnt + 1, acc)
+          else loop(ints.tail, ints.head, 1, (acc * 10 + cnt) * 10 + cur)
+        }
+      }
+
+      loop(list.tail, list.head, 1, 0)
+    }
+
+    val lookAndSaySequenceElement: Int => BigInt = n => {
+      @tailrec
+      def loop(cur: BigInt, left: BigInt): BigInt = {
+        if (left == 0) cur
+        else loop(toLookAndSay(cur), left - 1)
+      }
+
+      loop(1, n)
+    }
 
   end `Look-and-say Sequence`
 
