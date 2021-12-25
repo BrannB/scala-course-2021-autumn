@@ -77,6 +77,11 @@ object Homework:
       case _              => false
     }
 
+    override def hashCode(): Int = {
+      val prime = 41
+      prime * (prime + numer.hashCode()) + denom.hashCode()
+    }
+
   end Rational
 
 end Homework
