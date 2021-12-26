@@ -45,12 +45,12 @@ object Homework :
 
     end not
 
-    def and(left: => Boolean, right: => Boolean): Boolean = left match {
+    def and(left: Boolean, right: => Boolean): Boolean = left match {
       case true => right
       case _    => false
     }
 
-    def or(left: => Boolean, right: => Boolean): Boolean = left match {
+    def or(left: Boolean, right: => Boolean): Boolean = left match {
       case false => right
       case _     => true
     }
