@@ -1,11 +1,13 @@
 package karazin.scala.users.group.week2.homework
 
 import scala.annotation.targetName
-import scala.language.postfixOps
 import scala.math.{abs, signum}
 
 object Homework:
+
+  // `x` and `y` are inaccessible from outside
   class Rational(x: Int, y: Int):
+    // Checking the precondition. Is fails then throws `IllegalArgumentException`
     require(y > 0, "Denominator must be positive")
 
     def this(x: Int) = this(x, 1)
@@ -32,33 +34,19 @@ object Homework:
       !(this < that)
 
     @targetName("addition")
-    infix def +(that: Rational): Rational = {
-      new Rational(that.numer * this.denom + that.denom * this.numer, that.denom * this.denom)
-    }
+    infix def +(that: Rational): Rational = ???
 
     @targetName("negation")
-    infix def unary_- : Rational = {
-      new Rational(-this.numer, this.denom)
-    }
+    infix def unary_- : Rational = ???
 
     @targetName("substraction")
-    infix def -(that: Rational): Rational = {
-      new Rational(that.denom * this.numer - that.numer * this.denom, that.denom * this.denom)
-    }
+    infix def -(that: Rational): Rational = ???
 
     @targetName("multiplication")
-    infix def *(that: Rational): Rational = {
-      new Rational(that.numer * this.numer, that.denom * this.denom)
-    }
+    infix def *(that: Rational): Rational = ???
 
-    @targetName("division")
-    infix def /(that: Rational): Rational = {
-      // if numer is 0 -> then return null
-      if that.numer == 0
-        then throw IllegalArgumentException("Division by zero is not allowed")
-      else
-        new Rational(that.numer * this.denom, that.denom * this.numer)
-    }
+    @targetName("devision")
+    infix def /(that: Rational): Rational = ???
 
     override def toString: String = s"${this.numer}/${this.denom}"
 
@@ -67,20 +55,7 @@ object Homework:
 
     private lazy val g = gcd(abs(x), y)
 
-
-    override def equals(other: Any): Boolean = other match {
-      case that: Rational =>
-          (denom == that.denom) &&
-          (that.isInstanceOf[Rational]) &&
-          (g == that.g) &&
-          (numer == that.numer)
-      case _              => false
-    }
-
-    override def hashCode(): Int = {
-      val prime = 41
-      prime * (prime + numer.hashCode()) + denom.hashCode()
-    }
+    override def equals(other: Any): Boolean = ???
 
   end Rational
 
