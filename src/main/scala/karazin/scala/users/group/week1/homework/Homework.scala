@@ -45,21 +45,15 @@ object Homework :
 
     end not
 
-    def and(left: Boolean, right: Boolean): Boolean =
-      if (left)
-        if right then true else false
-      else
-        false
+    def and(left: => Boolean, right: => Boolean): Boolean = left match {
+      case true => right
+      case _    => false
+    }
 
-    end and
-
-    def or(left: Boolean, right: Boolean): Boolean =
-      if not(left) then
-        if not(right) then false else true
-      else
-        true
-
-    end or
+    def or(left: => Boolean, right: => Boolean): Boolean = left match {
+      case false => right
+      case _     => true
+    }
 
   end `Boolean Operators`
 
