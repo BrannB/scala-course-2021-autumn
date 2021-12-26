@@ -50,9 +50,7 @@ object HomeworkSpecification extends Properties("Homework"):
   }
 
   property("negation") = forAll { (rational: Rational) =>
-    val expected = Rational(rational.numer * (-1), rational.denom)
-    (-rational).numer == expected.numer
-    (-rational).denom == expected.denom
+    rational.unary_-.numer == -rational.numer
   }
 
   property("addition") = forAll { (left: Rational, right: Rational) =>
